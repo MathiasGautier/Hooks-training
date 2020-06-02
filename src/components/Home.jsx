@@ -18,14 +18,17 @@ function Home() {
   let handleLorem = (e) => {
     setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
   };
-  let handleClear=(e)=>{
-      setText("")
+let test=(e)=>{
+    setText("")
+}
+  let handleClear=()=>{
+      setText(undefined)
   }
 
 
   let textObj = (str) => {
     let keys = []; //-----------------------------initiate array for final result
-    let char = str.split(" "); //------------------split the string into an array
+    let char = str.toLowerCase().split(" "); //------------------split the string into an array
     let count = {}; //-----------------------------create an object to store our key/value pairs
     for (let i = 0; i < char.length; i++) {
       if (!count[char[i]]) {
@@ -46,17 +49,15 @@ function Home() {
       res.push(key + " appears " + count[key] + " times");
     }
 
-    if (key===""){return false}
-    else{return res};
+
+    return res
   };
 
 
   let textToShow;
   if (text !== undefined) {
     textToShow = textObj(text);
-  } else {
-    textToShow = false;
-  }
+  } 
 
  
 
@@ -73,14 +74,12 @@ function Home() {
         <div>
           <p>Want to try some Lorem ?</p>
           <button onClick={handleLorem}>Click here</button>
-          <button onClick={handleClear}>Clear the text</button>
+          <button onClick={handleClear, test}>Clear the text</button>
         </div>
         <div>
-          <textarea className="textCount" type="text" onChange={handleText} value={text}>
+          <textarea className="textCount" type="text" onChange={handleText} value={text}/>
          
-          </textarea>
-         
-          {textToShow !== false &&
+          {textToShow &&
             textToShow.map((i, index) => {
               return <p key={index}>{i}</p>;
             })}
